@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace Aquarium
 {
-    public class Fish
+    public abstract class Fish
     {
         public string Look { get; set; }
-        public string Size { get; set; }
-        public int MoveSpeedLeftAndRight { get; set; }
+        public int Size { get; set; }
+        public double MoveSpeedLeftAndRight { get; set; }
         public double MoveSpeedUpAndDown { get; set; }
 
-        public Fish(string look, string size, int moveSpeedLeftAndRight, double moveSpeedUpAndDown)
+        
+
+        public static void MoveFishLeftRight()
         {
-            Look = look;
-            Size = size;
-            MoveSpeedLeftAndRight = moveSpeedLeftAndRight;
-            MoveSpeedUpAndDown = moveSpeedUpAndDown;
+            Random leftRigt = new Random();
+            leftRigt.Next(0, 1);
+
+
+
+
         }
     }
 }

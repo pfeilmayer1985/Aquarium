@@ -9,31 +9,44 @@ namespace Aquarium
 {
     public class Aquarium
     {
+        public List<Fish> FishList { get; set; }
 
         public static void AquariumLeer(int x, int y)
         {
-           // x = 100;
-           // y = 20;
 
             string[,] aquarium = new string[x, y];
 
-           
+            Random positionY = new Random();
+            int posY = positionY.Next(1, y - 1);
+            Random positionX = new Random();
+            int posX = positionX.Next(1, x - 1);
+
+            AddFish(posX, posY);
+
 
             for (int j = 0; j < y; j++)
             {
+
                 for (int i = 0; i < x; i++)
                 {
-                    if (i == 0 || i == x - 1)
+                    if (aquarium[i, j] != " ")
                     {
-                        aquarium[i, j] = "|";
                     }
+
                     else
                     {
-                        aquarium[i, j] = " ";
-                    }
-                    if (j == y - 1)
-                    {
-                        aquarium[i, j] = "-";
+                        if (i == 0 || i == x - 1)
+                        {
+                            aquarium[i, j] = "|";
+                        }
+                        else
+                        {
+                            aquarium[i, j] = " ";
+                        }
+                        if (j == y - 1)
+                        {
+                            aquarium[i, j] = "-";
+                        }
                     }
                 }
             }
@@ -50,5 +63,19 @@ namespace Aquarium
             }
 
         }
+
+        public static void AddFish(int x, int y)
+        {
+            //Console.Write(Look);
+            FCarp myCarp = new FCarp();
+           // myCarp.ShowAppearence();
+
+        }
+
+
+
+
+
+
     }
 }

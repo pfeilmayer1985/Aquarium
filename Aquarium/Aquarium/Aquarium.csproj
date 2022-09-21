@@ -44,6 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aquarium.cs" />
+    <Compile Include="CarUebung.cs" />
+    <Compile Include="FBlowfish.cs" />
+    <Compile Include="FCarp.cs" />
+    <Compile Include="Fish.cs" />
+    <Compile Include="FShark.cs" />
+    <Compile Include="FSwordfish.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
