@@ -11,13 +11,15 @@ namespace Aquarium
     {
         public List<Fish> FishList { get; set; }
 
-        public static void AquariumLeer(int x, int y)
+        public Aquarium()
+        {
+            FishList = new List<Fish>();
+        }
+
+        public void AquariumLeer(int x, int y)
         {
 
             string[,] aquarium = new string[x, y];
-
-
-
 
             for (int j = 0; j < y; j++)
             {
@@ -39,8 +41,17 @@ namespace Aquarium
                     }
 
                 }
+
             }
 
+            foreach (Fish selection in FishList)
+            {
+                for (int i = 0; i < selection.Look.Length; i++)
+                {
+                    aquarium[selection.XPosition + i, selection.YPosition] = selection.Look[i].ToString();
+                }
+
+            }
 
 
             for (int j = 0; j < y; j++)
@@ -54,19 +65,35 @@ namespace Aquarium
 
         }
 
-        public static void AddCarp(int x, int y)
+        public void AddCarp(int x, int y)
         {
-            
-            FCarp myCarp = new FCarp();
-            Console.Write(myCarp.Look);
+
+            FCarp myCarp = new FCarp(x, y);
+            FishList.Add(myCarp);
 
         }
 
-        public static void AddShark(int x, int y)
+        public void AddShark(int x, int y)
         {
 
-            FShark myShark = new FShark();
-            Console.Write(myShark.Look);
+            FShark myShark = new FShark(x, y);
+            FishList.Add(myShark);
+
+        }
+
+        public void AddBlowfish(int x, int y)
+        {
+
+            FBlowfish myBlowfish = new FBlowfish(x, y);
+            FishList.Add(myBlowfish);
+
+        }
+
+        public void AddSwordfish(int x, int y)
+        {
+
+            FSwordfish mySwordfish = new FSwordfish(x, y);
+            FishList.Add(mySwordfish);
 
         }
 

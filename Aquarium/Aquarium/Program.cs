@@ -15,27 +15,68 @@ namespace Aquarium
         static void Main(string[] args)
         {
 
-
-            Console.WriteLine("Your Aquarium Length (x) : ");
+            Console.WriteLine("Your Aquarium Length (x) min 50 : ");
             int x = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Your Aquarium Height (y) : ");
+            Console.WriteLine("Your Aquarium Height (y) max 40: ");
             int y = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
-           // Aquarium.AquariumLeer(x, y);
+            Aquarium aq = new Aquarium();
 
-            Random positionYC = new Random();
-            int posYC = positionYC.Next(1, y - 1);
-            Random positionXC = new Random();
-            int posXC = positionXC.Next(1, x - 1);
 
-            Random positionYS = new Random();
-            int posYS = positionYS.Next(1, y - 1);
-            Random positionXS = new Random();
-            int posXS = positionXS.Next(1, x - 1);
+            Random randomGenerator = new Random();
+            int posYC = randomGenerator.Next(1, y - 1);
+            int posXC = randomGenerator.Next(1, x - 4);
 
-            Aquarium.AddCarp(posXC, posYC);
-            Aquarium.AddShark(posXS, posYS);
+            int posYS = randomGenerator.Next(1, y - 1);
+            int posXS = randomGenerator.Next(1, x - 11);
+
+            int posYB = randomGenerator.Next(1, y - 1);
+            int posXB = randomGenerator.Next(1, x - 6);
+
+            int posYSw = randomGenerator.Next(1, y - 1);
+            int posXSw = randomGenerator.Next(1, x - 5);
+
+            aq.AddCarp(posXC, posYC);
+            aq.AddShark(posXS, posYS);
+            aq.AddBlowfish(posXB, posYB);
+            aq.AddSwordfish(posXSw, posYSw);
+
+            bool doAsLong = true;
+            while (doAsLong)
+            {
+                for (int i = 1; i < aq.FishList.Count; i++)
+                {
+                    if (aq.FishList[i-1].YPosition-1 <= aq.FishList[i].YPosition && aq.FishList[i].YPosition <= aq.FishList[i - 1].YPosition+1)
+                    {
+                        aq.FishList[i].YPosition = randomGenerator.Next(1, y-1);
+                    }
+                    else if (aq.FishList[i - 1].XPosition - 11 <= aq.FishList[i].XPosition && aq.FishList[i].XPosition <= aq.FishList[i - 1].XPosition + 11)
+                    {
+                        aq.FishList[i].XPosition = randomGenerator.Next(1, x-11);
+                    }
+                    else
+                    {
+                        if (i == aq.FishList.Count-1)
+                        {
+                            doAsLong = false;
+                        }
+                    }
+                    
+                }
+            }
+
+
+
+            aq.AquariumLeer(x, y);
+
+            Console.ReadLine();
+
+
+
+
+
+
 
 
             //List<CarUebung> listOfCars = new List<CarUebung>();
@@ -47,7 +88,6 @@ namespace Aquarium
             //}
             //listOfCars[0].EngineOn();
             //listOfCars[0].Accelerate();
-
 
             //listOfCars[0].AccelerateCustom();
             //if (listOfCars[0].Speed >= listOfCars[0].MaxSpeed)
@@ -68,12 +108,6 @@ namespace Aquarium
             //int zahl = 5;
             //zahl.ToString();
             //Console.WriteLine(zahl);
-
-
-
-            Console.ReadLine();
-
-
 
         }
 

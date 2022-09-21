@@ -9,12 +9,14 @@ namespace Aquarium
     public class FBlowfish : Fish
     {
 
-        public FBlowfish()
+        public FBlowfish(int xPos, int yPos)
         {
             Look = "<()><";
             Size = 3;
             MoveSpeedLeftAndRight = 0.1;
             MoveSpeedUpAndDown = 0.1;
+            XPosition = xPos;
+            YPosition = yPos;
         }
 
     }

@@ -8,12 +8,14 @@ namespace Aquarium
 {
     public class FShark : Fish
     {
-        public FShark()
+        public FShark(int xPos, int yPos)
         {
             Look = "<///====><";
             Size = 5;
             MoveSpeedLeftAndRight = 0.25;
             MoveSpeedUpAndDown = 0.25;
+            XPosition = xPos;
+            YPosition = yPos;
         }
 
     }

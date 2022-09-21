@@ -9,12 +9,14 @@ namespace Aquarium
     public class FCarp : Fish
     {
 
-        public FCarp()
+        public FCarp(int xPos, int yPos)
         {
             Look = "<><";
             Size = 1;
             MoveSpeedLeftAndRight = 0.5;
             MoveSpeedUpAndDown = 0.5;
+            XPosition = xPos;
+            YPosition = yPos;
         }
         //public FCarp() { }
 

@@ -12,16 +12,14 @@ namespace Aquarium
         public int Size { get; set; }
         public double MoveSpeedLeftAndRight { get; set; }
         public double MoveSpeedUpAndDown { get; set; }
+        public int XPosition { get; set; }
+        public int YPosition { get; set; }
 
-        
 
         public static void MoveFishLeftRight()
         {
             Random leftRigt = new Random();
             leftRigt.Next(0, 1);
-
-
-
 
         }
     }
