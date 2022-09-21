@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace Aquarium
         public string TypeName { get; set; }
         public string Color { get; set; }
         public int Speed { get; set; }
+        public int MaxSpeed { get; set; }
         public bool EngineOnBool { get; set; }
 
         public CarUebung(int typeid, string make, string model, string typename, string color, int speed)
@@ -28,23 +30,26 @@ namespace Aquarium
             Speed = speed;
         }
 
-        public CarUebung() { }
+        public CarUebung()
+        {
+        }
 
         public static CarUebung AskForCar()
         {
 
             CarUebung inputFromUser = new CarUebung();
-            Console.Write("ID :");
+            Console.Write("ID : ");
             inputFromUser.TypeId = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Make :");
+            Console.Write("Make : ");
             inputFromUser.Make = Console.ReadLine();
-            Console.Write("Model :");
+            Console.Write("Model : ");
             inputFromUser.Model = Console.ReadLine();
-            Console.Write("ID :");
+            Console.Write("Model type : ");
             inputFromUser.TypeName = Console.ReadLine();
-            Console.Write("ID :");
+            Console.Write("Color : ");
             inputFromUser.Color = Console.ReadLine();
-
+            inputFromUser.EngineOnBool = false;
+            inputFromUser.MaxSpeed = 190;
             return inputFromUser;
 
         }
@@ -52,7 +57,7 @@ namespace Aquarium
 
         public void ShowMyCar()
         {
-            Console.Write($"Car Id is {TypeId}. It is a {Color} {Make} {Model} {TypeName}");
+            Console.WriteLine($"Car Id is {TypeId}. It is a {Color} {Make} {Model} {TypeName}");
         }
 
         public void EngineOn()
@@ -60,12 +65,12 @@ namespace Aquarium
 
             if (EngineOnBool == false)
             {
-                Console.Write("This car is resting with the engine Off. Starting Engine!");
+                Console.WriteLine($"This {Make} {Model} has the engine Off. Starting Engine!");
                 EngineOnBool = true;
             }
             else
             {
-                Console.Write($"This car has it's engine on and moving with {Speed} kmh.");
+                Console.WriteLine($"This {Make} {Model} has it's engine on and moving with {Speed} kmh.");
             }
         }
         public void EngineOff()
@@ -73,17 +78,53 @@ namespace Aquarium
 
             if (EngineOnBool == true)
             {
-                Console.Write("This car was moving. Reducing speed and stopping the engine!");
+                Console.WriteLine($"This {Make} {Model} was moving with {Speed} kmh. Breaking hard and stopping the engine!");
                 Speed = 0;
-                EngineOnBool = true;
+                EngineOnBool = false;
             }
             else
             {
-                Console.Write($"This car is parked, engine allready off.");
+                Console.WriteLine($"This car is parked, engine allready off.");
             }
 
         }
+        public void Accelerate()
+        {
+            Speed += 1;
+            Console.WriteLine($"Accelerating to {Speed} kmh.");
+            
+        }
 
+        public void AccelerateCustom()
+        {
+            Console.WriteLine("Desired speed : ");
+            int askForUserSpeed = Convert.ToInt32(Console.ReadLine());
+            Speed = askForUserSpeed;
+        }
+
+        public void Brake()
+        {
+            Speed -= 10;
+            Console.WriteLine($"Breaking hard to {Speed} kmh.");
+        }
+
+        public void BrakeCustom()
+        {
+            Console.WriteLine("Desired speed after braking : ");
+            int askForUserSpeed = Convert.ToInt32(Console.ReadLine());
+            Speed -= askForUserSpeed;
+            Console.WriteLine($"Breaking hard to {Speed} kmh.");
+        }
+
+        public void ChangeColor()
+        {
+            string oldColor = Color;
+            Console.WriteLine("Desired Color : ");
+            string askForUserColor = Console.ReadLine();
+            Color = askForUserColor;
+            Console.WriteLine($"The {Make} {Model} with ID {TypeId} used to be {oldColor} and after painting it over became {Color} ");
+
+        }
 
     }
 }
