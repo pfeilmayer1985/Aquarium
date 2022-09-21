@@ -20,7 +20,7 @@ namespace Aquarium
         public int MaxSpeed { get; set; }
         public bool EngineOnBool { get; set; }
 
-        public CarUebung(int typeid, string make, string model, string typename, string color, int speed)
+        public CarUebung(int typeid, string make, string model, string typename, string color, int speed, int maxspeed, bool engineonbool)
         {
             TypeId = typeid;
             Make = make;
@@ -28,6 +28,8 @@ namespace Aquarium
             TypeName = typename;
             Color = color;
             Speed = speed;
+            MaxSpeed = maxspeed;
+            EngineOnBool = false;
         }
 
         public CarUebung()
@@ -48,7 +50,7 @@ namespace Aquarium
             inputFromUser.TypeName = Console.ReadLine();
             Console.Write("Color : ");
             inputFromUser.Color = Console.ReadLine();
-            inputFromUser.EngineOnBool = false;
+            inputFromUser.EngineOnBool = true;
             inputFromUser.MaxSpeed = 190;
             return inputFromUser;
 
@@ -78,7 +80,7 @@ namespace Aquarium
 
             if (EngineOnBool == true)
             {
-                Console.WriteLine($"This {Make} {Model} was moving with {Speed} kmh. Breaking hard and stopping the engine!");
+                Console.WriteLine($"This {Make} {Model} is moving with {Speed} kmh. Breaking hard to standstill and stopping the engine!");
                 Speed = 0;
                 EngineOnBool = false;
             }
@@ -124,6 +126,12 @@ namespace Aquarium
             Color = askForUserColor;
             Console.WriteLine($"The {Make} {Model} with ID {TypeId} used to be {oldColor} and after painting it over became {Color} ");
 
+        }
+
+        public override string ToString()
+        {
+            return "Speed = " + this.Speed;
+            
         }
 
     }

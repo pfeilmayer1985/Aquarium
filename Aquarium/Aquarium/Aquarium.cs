@@ -16,12 +16,7 @@ namespace Aquarium
 
             string[,] aquarium = new string[x, y];
 
-            Random positionY = new Random();
-            int posY = positionY.Next(1, y - 1);
-            Random positionX = new Random();
-            int posX = positionX.Next(1, x - 1);
 
-            AddFish(posX, posY);
 
 
             for (int j = 0; j < y; j++)
@@ -29,25 +24,20 @@ namespace Aquarium
 
                 for (int i = 0; i < x; i++)
                 {
-                    if (aquarium[i, j] != " ")
-                    {
-                    }
 
+                    if (i == 0 || i == x - 1)
+                    {
+                        aquarium[i, j] = "|";
+                    }
                     else
                     {
-                        if (i == 0 || i == x - 1)
-                        {
-                            aquarium[i, j] = "|";
-                        }
-                        else
-                        {
-                            aquarium[i, j] = " ";
-                        }
-                        if (j == y - 1)
-                        {
-                            aquarium[i, j] = "-";
-                        }
+                        aquarium[i, j] = " ";
                     }
+                    if (j == y - 1)
+                    {
+                        aquarium[i, j] = "-";
+                    }
+
                 }
             }
 
@@ -64,11 +54,19 @@ namespace Aquarium
 
         }
 
-        public static void AddFish(int x, int y)
+        public static void AddCarp(int x, int y)
         {
-            //Console.Write(Look);
+            
             FCarp myCarp = new FCarp();
-           // myCarp.ShowAppearence();
+            Console.Write(myCarp.Look);
+
+        }
+
+        public static void AddShark(int x, int y)
+        {
+
+            FShark myShark = new FShark();
+            Console.Write(myShark.Look);
 
         }
 
