@@ -16,9 +16,9 @@ namespace Aquarium
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Your Aquarium Length (x) min 50 : ");
+            Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
             double x = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Your Aquarium Height (y) max 40: ");
+            Console.Write("Your Aquarium Height (y) (min 15, max 30): ");
             double y = Convert.ToDouble(Console.ReadLine());
 
             Console.Clear();
@@ -27,16 +27,16 @@ namespace Aquarium
 
             Random randomGenerator = new Random();
             double posYC = randomGenerator.Next(1, (int)y - 1);
-            double posXC = randomGenerator.Next(1, (int)x - 4);
+            double posXC = randomGenerator.Next(1, (int)x - 5);
 
             double posYS = randomGenerator.Next(1, (int)y - 1);
-            double posXS = randomGenerator.Next(1, (int)x - 11);
+            double posXS = randomGenerator.Next(1, (int)x - 12);
 
             double posYB = randomGenerator.Next(1, (int)y - 1);
-            double posXB = randomGenerator.Next(1, (int)x - 6);
+            double posXB = randomGenerator.Next(1, (int)x - 7);
 
             double posYSw = randomGenerator.Next(1, (int)y - 1);
-            double posXSw = randomGenerator.Next(1, (int)x - 5);
+            double posXSw = randomGenerator.Next(1, (int)x - 6);
 
             aq.AddCarp((int)posXC, (int)posYC);
             aq.AddShark((int)posXS, (int)posYS);

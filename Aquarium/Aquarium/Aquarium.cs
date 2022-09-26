@@ -21,6 +21,7 @@ namespace Aquarium
         public void AquariumLeer(double x, double y)
         {
 
+
             AquariumBehaelter = new string[(int)x, (int)y];
 
             for (int j = 0; j < y; j++)
@@ -29,9 +30,9 @@ namespace Aquarium
                 for (int i = 0; i < x; i++)
                 {
 
-
                     if (i == 0 || i == x - 1)
                     {
+
                         AquariumBehaelter[i, j] = "|";
                     }
                     else
@@ -40,6 +41,7 @@ namespace Aquarium
                     }
                     if (j == y - 1)
                     {
+
                         AquariumBehaelter[i, j] = "-";
                     }
 
@@ -52,6 +54,7 @@ namespace Aquarium
             {
                 for (int i = 0; i < selection.Look.Length; i++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green; 
                     AquariumBehaelter[(int)(selection.XPosition) + i, (int)selection.YPosition] = selection.Look[i].ToString();
                 }
             }
@@ -120,7 +123,7 @@ namespace Aquarium
                     myFish.Look = myFish.BasicLook;
                     myFish.XPosition -= myFish.Speed;
                 }
-                else if (myFish.XPosition + myFish.Size >= AquariumBehaelter.GetLength(0) - 1)
+                else if (myFish.XPosition + myFish.Size >= AquariumBehaelter.GetLength(0) - 2)
                 {
                     myFish.Look = myFish.BasicLook;
                     myFish.XPosition -= myFish.Speed;
