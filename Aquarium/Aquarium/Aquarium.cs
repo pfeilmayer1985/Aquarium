@@ -10,6 +10,8 @@ namespace Aquarium
     public class Aquarium
     {
         public List<Fish> FishList { get; set; }
+        public string[,] AquariumBehaelter { get; set; }
+
 
         public Aquarium()
         {
@@ -19,7 +21,7 @@ namespace Aquarium
         public void AquariumLeer(int x, int y)
         {
 
-            string[,] aquarium = new string[x, y];
+            AquariumBehaelter = new string[x, y];
 
             for (int j = 0; j < y; j++)
             {
@@ -27,38 +29,39 @@ namespace Aquarium
                 for (int i = 0; i < x; i++)
                 {
 
+
                     if (i == 0 || i == x - 1)
                     {
-                        aquarium[i, j] = "|";
+                        AquariumBehaelter[i, j] = "|";
                     }
                     else
                     {
-                        aquarium[i, j] = " ";
+                        AquariumBehaelter[i, j] = " ";
                     }
                     if (j == y - 1)
                     {
-                        aquarium[i, j] = "-";
+                        AquariumBehaelter[i, j] = "-";
                     }
 
                 }
 
             }
+
 
             foreach (Fish selection in FishList)
             {
                 for (int i = 0; i < selection.Look.Length; i++)
                 {
-                    aquarium[selection.XPosition + i, selection.YPosition] = selection.Look[i].ToString();
+                    AquariumBehaelter[selection.XPosition + i, selection.YPosition] = selection.Look[i].ToString();
                 }
-
             }
-
+            Console.Clear();
 
             for (int j = 0; j < y; j++)
             {
                 for (int i = 0; i < x; i++)
                 {
-                    Console.Write(aquarium[i, j]);
+                    Console.Write(AquariumBehaelter[i, j]);
                 }
                 Console.Write("\n");
             }
@@ -97,10 +100,62 @@ namespace Aquarium
 
         }
 
+        public void MoveXAxis()
+        {
+
+            foreach (Fish myFish in FishList)
+            {
+                if (myFish.XPosition >= 2 && myFish.SwimDirection == false)
+                {
+                    myFish.Look = myFish.BasicLook;
+                    myFish.XPosition -= 1;
+                }
+                else if (myFish.XPosition + myFish.Size >= AquariumBehaelter.GetLength(0) - 1)
+                {
+                    myFish.Look = myFish.BasicLook;
+                    myFish.XPosition -= 1;
+                    myFish.SwimDirection = false;
+                }
+                else
+                {
+                    myFish.XPosition += 1;
+                    myFish.Look = myFish.InvertedLook;
+                    myFish.SwimDirection = true;
+                }
+            }
 
 
+        }
 
+        public void MoveYAxis()
+        {
 
+            //Random random = new Random();
 
+            //if (random.Next(0, 1) == 1)
+            //{
+
+            foreach (Fish myFish in FishList)
+            {
+
+                if (myFish.YPosition >= 1 && myFish.SwimDepth == false)
+                {
+                    myFish.YPosition -= 1;
+                }
+                else if (myFish.YPosition >= AquariumBehaelter.GetLength(1) - 2)
+                {
+                    myFish.SwimDepth = false;
+                    myFish.YPosition -= 1;
+                }
+
+                else
+                {
+                    myFish.SwimDepth = true;
+                    myFish.YPosition += 1;
+
+                }
+                //}
+            }
+        }
     }
 }

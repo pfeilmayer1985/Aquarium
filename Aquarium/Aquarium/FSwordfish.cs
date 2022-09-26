@@ -11,8 +11,9 @@ namespace Aquarium
         public FSwordfish(int xPos, int yPos)
         {
             Look = "-<><";
-            Size = 2;
-            MoveSpeedLeftAndRight = 0.2;
+            BasicLook = "-<><";
+            InvertedLook = "><>-";
+            Size = 4;
             MoveSpeedUpAndDown = 0.2;
             XPosition = xPos;
             YPosition = yPos;

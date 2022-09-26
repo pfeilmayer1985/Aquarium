@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Remoting.Channels;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Aquarium
@@ -70,8 +71,13 @@ namespace Aquarium
             }
 
 
-
-            aq.AquariumLeer(x, y);
+            while (true)
+            {
+                aq.AquariumLeer(x, y);
+                aq.MoveXAxis();
+                aq.MoveYAxis();
+                Thread.Sleep(300);
+            }
 
             Console.ReadLine();
 

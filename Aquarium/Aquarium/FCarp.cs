@@ -12,8 +12,9 @@ namespace Aquarium
         public FCarp(int xPos, int yPos)
         {
             Look = "<><";
-            Size = 1;
-            MoveSpeedLeftAndRight = 0.5;
+            BasicLook = "<><";
+            InvertedLook = "><>";
+            Size = 3;
             MoveSpeedUpAndDown = 0.5;
             XPosition = xPos;
             YPosition = yPos;

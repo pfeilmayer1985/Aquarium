@@ -11,8 +11,9 @@ namespace Aquarium
         public FShark(int xPos, int yPos)
         {
             Look = "<///====><";
-            Size = 5;
-            MoveSpeedLeftAndRight = 0.25;
+            BasicLook = "<///====><";
+            InvertedLook = "><====///>";
+            Size = 10;
             MoveSpeedUpAndDown = 0.25;
             XPosition = xPos;
             YPosition = yPos;

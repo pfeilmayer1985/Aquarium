@@ -12,8 +12,9 @@ namespace Aquarium
         public FBlowfish(int xPos, int yPos)
         {
             Look = "<()><";
-            Size = 3;
-            MoveSpeedLeftAndRight = 0.1;
+            BasicLook = "<()><";
+            InvertedLook = "><()>";
+            Size = 5;
             MoveSpeedUpAndDown = 0.1;
             XPosition = xPos;
             YPosition = yPos;
