@@ -17,65 +17,92 @@ namespace Aquarium
         {
 
             Console.WriteLine("Your Aquarium Length (x) min 50 : ");
-            int x = Convert.ToInt32(Console.ReadLine());
+            double x = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Your Aquarium Height (y) max 40: ");
-            int y = Convert.ToInt32(Console.ReadLine());
+            double y = Convert.ToDouble(Console.ReadLine());
 
             Console.Clear();
             Aquarium aq = new Aquarium();
 
 
             Random randomGenerator = new Random();
-            int posYC = randomGenerator.Next(1, y - 1);
-            int posXC = randomGenerator.Next(1, x - 4);
+            double posYC = randomGenerator.Next(1, (int)y - 1);
+            double posXC = randomGenerator.Next(1, (int)x - 4);
 
-            int posYS = randomGenerator.Next(1, y - 1);
-            int posXS = randomGenerator.Next(1, x - 11);
+            double posYS = randomGenerator.Next(1, (int)y - 1);
+            double posXS = randomGenerator.Next(1, (int)x - 11);
 
-            int posYB = randomGenerator.Next(1, y - 1);
-            int posXB = randomGenerator.Next(1, x - 6);
+            double posYB = randomGenerator.Next(1, (int)y - 1);
+            double posXB = randomGenerator.Next(1, (int)x - 6);
 
-            int posYSw = randomGenerator.Next(1, y - 1);
-            int posXSw = randomGenerator.Next(1, x - 5);
+            double posYSw = randomGenerator.Next(1, (int)y - 1);
+            double posXSw = randomGenerator.Next(1, (int)x - 5);
 
-            aq.AddCarp(posXC, posYC);
-            aq.AddShark(posXS, posYS);
-            aq.AddBlowfish(posXB, posYB);
-            aq.AddSwordfish(posXSw, posYSw);
+            aq.AddCarp((int)posXC, (int)posYC);
+            aq.AddShark((int)posXS, (int)posYS);
+            aq.AddBlowfish((int)posXB, (int)posYB);
+            aq.AddSwordfish((int)posXSw, (int)posYSw);
 
             bool doAsLong = true;
+            bool doAsShort = true;
+
             while (doAsLong)
             {
                 for (int i = 1; i < aq.FishList.Count; i++)
                 {
-                
+
                     //aici se verifica pestele actual in comparatie cu pozitia pestelui anterior. dar al ultimului cu primul nu sau al doilea
 
-                    if (aq.FishList[i-1].YPosition-1 <= aq.FishList[i].YPosition && aq.FishList[i].YPosition <= aq.FishList[i - 1].YPosition+1)
+                    if (aq.FishList[i - 1].YPosition - 1 <= aq.FishList[i].YPosition && aq.FishList[i].YPosition <= aq.FishList[i - 1].YPosition + 1)
                     {
-                        aq.FishList[i].YPosition = randomGenerator.Next(1, y-1);
+                        aq.FishList[i].YPosition = randomGenerator.Next(1, (int)y - 1);
                     }
                     else if (aq.FishList[i - 1].XPosition - 11 <= aq.FishList[i].XPosition && aq.FishList[i].XPosition <= aq.FishList[i - 1].XPosition + 11)
                     {
-                        aq.FishList[i].XPosition = randomGenerator.Next(1, x-11);
+                        aq.FishList[i].XPosition = randomGenerator.Next(1, (int)x - 11);
                     }
                     else
                     {
-                        if (i == aq.FishList.Count-1)
+                        if (i == aq.FishList.Count - 1)
                         {
                             doAsLong = false;
                         }
                     }
-                    
+
                 }
             }
 
 
             while (true)
             {
-                aq.AquariumLeer(x, y);
                 aq.MoveXAxis();
                 aq.MoveYAxis();
+                aq.AquariumLeer(x, y);
+
+                //while (doAsShort)
+                //{
+                for (int i = 1; i < aq.FishList.Count; i++)
+                {
+                    //if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) && (aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition))
+                    if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) && (aq.FishList[i - 1].XPosition - 11 <= aq.FishList[i].XPosition && aq.FishList[i].XPosition <= aq.FishList[i - 1].XPosition + 11))
+                    {
+                        if (aq.FishList[i - 1].Size > aq.FishList[i].Size)
+                        {
+                            aq.RemoveAFish(aq.FishList[i]);
+                        }
+                        else
+                        {
+                            aq.RemoveAFish(aq.FishList[i - 1]);
+                        }
+
+                    }
+                    if (i == aq.FishList.Count - 1)
+                    {
+                        //doAsShort = false;
+                    }
+                    //}
+                }
+
                 Thread.Sleep(300);
             }
 

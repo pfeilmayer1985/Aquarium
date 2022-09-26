@@ -13,8 +13,10 @@ namespace Aquarium
             Look = "-<><";
             BasicLook = "-<><";
             InvertedLook = "><>-";
+            TypeF = "Swordfish";
+            Speed = 1;
             Size = 4;
-            MoveSpeedUpAndDown = 0.2;
+            MoveSpeedUpAndDown = 20;
             XPosition = xPos;
             YPosition = yPos;
         }

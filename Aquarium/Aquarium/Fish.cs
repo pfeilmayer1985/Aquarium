@@ -11,10 +11,12 @@ namespace Aquarium
         public string Look { get; set; }
         public string BasicLook { get; set; }
         public string InvertedLook { get; set; }
+        public string TypeF { get; set; }
         public int Size { get; set; }
+        public double Speed { get; set; }
         public double MoveSpeedUpAndDown { get; set; }
-        public int XPosition { get; set; }
-        public int YPosition { get; set; }
+        public double XPosition { get; set; }
+        public double YPosition { get; set; }
         public bool SwimDirection { get; set; }
         public bool SwimDepth { get; set; }
 

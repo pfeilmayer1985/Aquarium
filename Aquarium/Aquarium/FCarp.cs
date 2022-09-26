@@ -14,8 +14,10 @@ namespace Aquarium
             Look = "<><";
             BasicLook = "<><";
             InvertedLook = "><>";
+            TypeF = "Carp";
+            Speed = 1;
             Size = 3;
-            MoveSpeedUpAndDown = 0.5;
+            MoveSpeedUpAndDown = 50;
             XPosition = xPos;
             YPosition = yPos;
         }

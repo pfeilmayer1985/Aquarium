@@ -11,17 +11,17 @@ namespace Aquarium
     {
         public List<Fish> FishList { get; set; }
         public string[,] AquariumBehaelter { get; set; }
-
+        Random random = new Random();
 
         public Aquarium()
         {
             FishList = new List<Fish>();
         }
 
-        public void AquariumLeer(int x, int y)
+        public void AquariumLeer(double x, double y)
         {
 
-            AquariumBehaelter = new string[x, y];
+            AquariumBehaelter = new string[(int)x, (int)y];
 
             for (int j = 0; j < y; j++)
             {
@@ -52,7 +52,7 @@ namespace Aquarium
             {
                 for (int i = 0; i < selection.Look.Length; i++)
                 {
-                    AquariumBehaelter[selection.XPosition + i, selection.YPosition] = selection.Look[i].ToString();
+                    AquariumBehaelter[(int)(selection.XPosition) + i, (int)selection.YPosition] = selection.Look[i].ToString();
                 }
             }
             Console.Clear();
@@ -65,6 +65,7 @@ namespace Aquarium
                 }
                 Console.Write("\n");
             }
+
 
         }
 
@@ -92,6 +93,13 @@ namespace Aquarium
 
         }
 
+        public void RemoveAFish(Fish fishToBeRemoved)
+        {
+
+            FishList.Remove(fishToBeRemoved);
+
+        }
+
         public void AddSwordfish(int x, int y)
         {
 
@@ -103,24 +111,27 @@ namespace Aquarium
         public void MoveXAxis()
         {
 
+
             foreach (Fish myFish in FishList)
             {
+
                 if (myFish.XPosition >= 2 && myFish.SwimDirection == false)
                 {
                     myFish.Look = myFish.BasicLook;
-                    myFish.XPosition -= 1;
+                    myFish.XPosition -= myFish.Speed;
                 }
                 else if (myFish.XPosition + myFish.Size >= AquariumBehaelter.GetLength(0) - 1)
                 {
                     myFish.Look = myFish.BasicLook;
-                    myFish.XPosition -= 1;
+                    myFish.XPosition -= myFish.Speed;
                     myFish.SwimDirection = false;
                 }
                 else
                 {
-                    myFish.XPosition += 1;
+                    myFish.XPosition += myFish.Speed;
                     myFish.Look = myFish.InvertedLook;
                     myFish.SwimDirection = true;
+
                 }
             }
 
@@ -130,32 +141,41 @@ namespace Aquarium
         public void MoveYAxis()
         {
 
-            //Random random = new Random();
 
-            //if (random.Next(0, 1) == 1)
-            //{
 
             foreach (Fish myFish in FishList)
             {
 
-                if (myFish.YPosition >= 1 && myFish.SwimDepth == false)
-                {
-                    myFish.YPosition -= 1;
-                }
-                else if (myFish.YPosition >= AquariumBehaelter.GetLength(1) - 2)
-                {
-                    myFish.SwimDepth = false;
-                    myFish.YPosition -= 1;
-                }
 
-                else
+
+                if (random.Next(0, 100) <= myFish.MoveSpeedUpAndDown)
                 {
-                    myFish.SwimDepth = true;
-                    myFish.YPosition += 1;
+
+                    if (myFish.YPosition >= 1 && myFish.SwimDepth == false)
+                    {
+
+                        myFish.YPosition -= 1;
+
+                    }
+                    else if (myFish.YPosition >= AquariumBehaelter.GetLength(1) - 2)
+                    {
+                        myFish.SwimDepth = false;
+                        myFish.YPosition -= 1;
+                    }
+
+                    else
+                    {
+                        myFish.SwimDepth = true;
+                        myFish.YPosition += 1;
+
+                    }
+
+
 
                 }
-                //}
             }
         }
     }
 }
+
+

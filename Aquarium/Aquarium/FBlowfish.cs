@@ -14,8 +14,10 @@ namespace Aquarium
             Look = "<()><";
             BasicLook = "<()><";
             InvertedLook = "><()>";
+            TypeF = "Blowfish";
+            Speed = 1;
             Size = 5;
-            MoveSpeedUpAndDown = 0.1;
+            MoveSpeedUpAndDown = 10;
             XPosition = xPos;
             YPosition = yPos;
         }
