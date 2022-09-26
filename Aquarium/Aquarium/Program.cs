@@ -47,6 +47,9 @@ namespace Aquarium
             {
                 for (int i = 1; i < aq.FishList.Count; i++)
                 {
+                
+                    //aici se verifica pestele actual in comparatie cu pozitia pestelui anterior. dar al ultimului cu primul nu sau al doilea
+
                     if (aq.FishList[i-1].YPosition-1 <= aq.FishList[i].YPosition && aq.FishList[i].YPosition <= aq.FishList[i - 1].YPosition+1)
                     {
                         aq.FishList[i].YPosition = randomGenerator.Next(1, y-1);
