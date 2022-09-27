@@ -92,27 +92,45 @@ namespace Aquarium
                 {
                     for (int j = i; j < aq.FishList.Count; j++)
                     {
+
+                        //if the fish i is the same as fish j, continue ???
                         if (aq.FishList[i] == aq.FishList[j])
                         {
                             continue;
                         }
+
+                        //if fish i and fist j have the exact same depth (Y - position) then check the X proximity/overlapping
                         if (aq.FishList[i].YPosition == aq.FishList[j].YPosition)
                         {
+
+                            //Make a new integer based list and add the first fish's look length(range - from starting x point to look lenght as endpoint) to the fish/list
                             List<int> firstFishRange = Enumerable.Range((int)aq.FishList[i].XPosition, aq.FishList[i].Look.Length).ToList();
+
+                            //Make a new integer based list and add the second fish's look length(range - from starting x point to look lenght as endpoint) to the fish/list
                             List<int> secondFishRange = Enumerable.Range((int)aq.FishList[j].XPosition, aq.FishList[j].Look.Length).ToList();
+                            
+                            //Check if the range/length of the first list has any overlapping with the second list and save the value to a boolean - either false or true
                             bool intersection = firstFishRange.Any(a => secondFishRange.Any(b => a == b));
 
+                            //if the boolean previously saved is true and any element from the first list/fish overlapps with any elements from the second list/fish
                             if (intersection)
                             {
+                                //if the size (length of the fish's look) of the first fish is bigger than the second one
                                 if (aq.FishList[i].Look.Length > aq.FishList[j].Look.Length)
                                 {
+                                    //the first fish, being bigger, eats the second, smaller fish
                                     aq.RemoveAFish(aq.FishList[j]);
+                                    
+                                    //resetting the list, starting both list checking from 0 instead of continuing from the last point
                                     i = 0;
                                     j = 0;
                                 }
                                 else
                                 {
+                                    //the second fish, being bigger, eats the first, smaller fish
                                     aq.RemoveAFish(aq.FishList[i]);
+                                    
+                                    //resetting the list, starting both list checking from 0 instead of continuing from the last point
                                     i = 0;
                                     j = 0;
                                 }
@@ -159,7 +177,7 @@ namespace Aquarium
 
                 */
 
-                Thread.Sleep(300);
+                Thread.Sleep(1);
             }
 
             Console.ReadLine();
