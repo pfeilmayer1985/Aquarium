@@ -18,11 +18,11 @@ namespace Aquarium
             FishList = new List<Fish>();
         }
 
-        public void AquariumLeer(double x, double y)
+        public void AquariumLeer(int x, int y)
         {
 
 
-            AquariumBehaelter = new string[(int)x, (int)y];
+            AquariumBehaelter = new string[x, y];
 
             for (int j = 0; j < y; j++)
             {
@@ -120,7 +120,7 @@ namespace Aquarium
 
                 if (random.Next(0, 20) == 10)
                 {
-                    
+
                     myFish.SwimDirection = !myFish.SwimDirection;
                     if (myFish.SwimDirection)
                     {

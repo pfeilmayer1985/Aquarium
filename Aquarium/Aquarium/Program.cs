@@ -23,33 +23,36 @@ namespace Aquarium
             //        Console.WriteLine($"I:{i}  \t j: {j}");
             //    }
             //}
+            bool continueGame = true;
+
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
-            double x = Convert.ToDouble(Console.ReadLine());
+            int x = Convert.ToInt32(Console.ReadLine());
             Console.Write("Your Aquarium Height (y) (min 15, max 30): ");
-            double y = Convert.ToDouble(Console.ReadLine());
+            int y = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
             Aquarium aq = new Aquarium();
 
 
             Random randomGenerator = new Random();
-            double posYC = randomGenerator.Next(1, (int)y - 1);
-            double posXC = randomGenerator.Next(3, (int)x - 5);
+            int posYC = randomGenerator.Next(1, y - 1);
+            int posXC = randomGenerator.Next(3, x - 5);
 
-            double posYS = randomGenerator.Next(1, (int)y - 1);
-            double posXS = randomGenerator.Next(3, (int)x - 12);
+            int posYS = randomGenerator.Next(1, y - 1);
+            int posXS = randomGenerator.Next(3, x - 12);
 
-            double posYB = randomGenerator.Next(1, (int)y - 1);
-            double posXB = randomGenerator.Next(3, (int)x - 7);
+            int posYB = randomGenerator.Next(1, y - 1);
+            int posXB = randomGenerator.Next(3, x - 7);
 
-            double posYSw = randomGenerator.Next(1, (int)y - 1);
-            double posXSw = randomGenerator.Next(3, (int)x - 6);
+            int posYSw = randomGenerator.Next(1, y - 1);
+            int posXSw = randomGenerator.Next(3, x - 6);
 
-            aq.AddCarp((int)posXC, (int)posYC);
-            aq.AddShark((int)posXS, (int)posYS);
-            aq.AddBlowfish((int)posXB, (int)posYB);
-            aq.AddSwordfish((int)posXSw, (int)posYSw);
+            aq.AddCarp(posXC, posYC);
+            aq.AddShark(posXS, posYS);
+            aq.AddBlowfish(posXB, posYB);
+            aq.AddSwordfish(posXSw, posYSw);
 
             bool doAsLong = true;
             // bool doAsShort = true;
@@ -70,11 +73,11 @@ namespace Aquarium
 
                     if (aq.FishList[i].YPosition - 2 <= aq.FishList[j].YPosition && aq.FishList[j].YPosition <= aq.FishList[i].YPosition + 2)
                     {
-                        aq.FishList[j].YPosition = randomGenerator.Next(1, (int)y - 1);
+                        aq.FishList[j].YPosition = randomGenerator.Next(1, y - 1);
                     }
                     else if (aq.FishList[i].XPosition - aq.FishList[j].Look.Length <= aq.FishList[j].XPosition && aq.FishList[j].XPosition <= aq.FishList[i].XPosition + aq.FishList[j].Look.Length)
                     {
-                        aq.FishList[j].XPosition = randomGenerator.Next(1, (int)x - (aq.FishList[j].Look.Length + 1));
+                        aq.FishList[j].XPosition = randomGenerator.Next(1, x - (aq.FishList[j].Look.Length + 1));
                     }
                     else
                     {
@@ -110,10 +113,10 @@ namespace Aquarium
                         {
 
                             //Make a new integer based list and add the first fish's look length(range - from starting x point to look lenght as endpoint) to the fish/list
-                            List<int> firstFishRange = Enumerable.Range((int)aq.FishList[i].XPosition, aq.FishList[i].Look.Length).ToList();
+                            List<int> firstFishRange = Enumerable.Range(aq.FishList[i].XPosition, aq.FishList[i].Look.Length).ToList();
 
                             //Make a new integer based list and add the second fish's look length(range - from starting x point to look lenght as endpoint) to the fish/list
-                            List<int> secondFishRange = Enumerable.Range((int)aq.FishList[j].XPosition, aq.FishList[j].Look.Length).ToList();
+                            List<int> secondFishRange = Enumerable.Range(aq.FishList[j].XPosition, aq.FishList[j].Look.Length).ToList();
 
                             //Check if the range of the first list has any overlapping with the second list and save the value to a boolean - either false or true
                             bool intersection = firstFishRange.Any(a => secondFishRange.Any(b => a == b));
@@ -185,13 +188,14 @@ namespace Aquarium
 
                 Thread.Sleep(1);
 
+                
                 if (aq.FishList.Count == 1)
                 {
                     foreach (var fish in aq.FishList)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine($"The only survivor is the {fish.TypeF}, also known as {fish.BasicLook}." +
+                        Console.WriteLine($"The only survivor is the {fish.TypeF}, also known as '{fish.BasicLook}' or '{fish.InvertedLook}'." +
                             $"\nThe 'Game' was refreshed {numberOfRefreshes} times until we had a winner." +
                             $"\nThanks for playing!" );
                     }
