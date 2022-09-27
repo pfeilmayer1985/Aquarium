@@ -27,16 +27,16 @@ namespace Aquarium
 
             Random randomGenerator = new Random();
             double posYC = randomGenerator.Next(1, (int)y - 1);
-            double posXC = randomGenerator.Next(1, (int)x - 5);
+            double posXC = randomGenerator.Next(3, (int)x - 5);
 
             double posYS = randomGenerator.Next(1, (int)y - 1);
-            double posXS = randomGenerator.Next(1, (int)x - 12);
+            double posXS = randomGenerator.Next(3, (int)x - 12);
 
             double posYB = randomGenerator.Next(1, (int)y - 1);
-            double posXB = randomGenerator.Next(1, (int)x - 7);
+            double posXB = randomGenerator.Next(3, (int)x - 7);
 
             double posYSw = randomGenerator.Next(1, (int)y - 1);
-            double posXSw = randomGenerator.Next(1, (int)x - 6);
+            double posXSw = randomGenerator.Next(3, (int)x - 6);
 
             aq.AddCarp((int)posXC, (int)posYC);
             aq.AddShark((int)posXS, (int)posYS);
@@ -75,16 +75,58 @@ namespace Aquarium
 
             while (true)
             {
+                aq.AquariumLeer(x, y);
                 aq.MoveXAxis();
                 aq.MoveYAxis();
-                aq.AquariumLeer(x, y);
+
 
                 //while (doAsShort)
                 //{
                 for (int i = 1; i < aq.FishList.Count; i++)
                 {
-                    //if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) && (aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition))
-                    if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) && (aq.FishList[i - 1].XPosition - 11 <= aq.FishList[i].XPosition && aq.FishList[i].XPosition <= aq.FishList[i - 1].XPosition + 11))
+
+                    List<int> firstFishRange = Enumerable.Range((int)aq.FishList[i - 1].XPosition, aq.FishList[i - 1].Size).ToList();
+                    List<int> secondFishRange = Enumerable.Range((int)aq.FishList[i].XPosition, aq.FishList[i].Size).ToList();
+
+                    bool intersection = firstFishRange.Any(a => secondFishRange.Any(b => a == b));
+
+                    if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) && intersection)
+                    {
+                        if (aq.FishList[i - 1].Size > aq.FishList[i].Size)
+                        {
+                            aq.RemoveAFish(aq.FishList[i]);
+                        }
+                        else
+                        {
+                            aq.RemoveAFish(aq.FishList[i - 1]);
+                        }
+                    }
+
+                    /*
+                    //Checking if Y(A) is the same with Y(B) - both fishes are on the same line/heighth
+                    if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) &&
+                        //Checking if X(A) is in the same pos with X(B)+FishLength
+                        (aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition + aq.FishList[i].Size ||
+                        //Checking if X(A)+FishLength is in the same pos with X(B)
+                        aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size == aq.FishList[i].XPosition ||
+                        //Checking if X(A) is in the same pos with X(B)
+                        aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition ||
+                        //Checking if X(A)+FishLength is in the same pos with X(B)+FishLength
+                        aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size == aq.FishList[i].XPosition + aq.FishList[i].Size ||
+                        //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)
+                        aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition ||
+                        //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)+FishLength
+                        aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition + aq.FishList[i].Size ||
+                        //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)+HalfOfFishLength
+                        aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) ||
+                        //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)
+                        aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition ||
+                        //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)+FishLength
+                        aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size ||
+                        //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)+HalfOfFishLength
+                        aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2)
+
+                        ))
                     {
                         if (aq.FishList[i - 1].Size > aq.FishList[i].Size)
                         {
@@ -96,6 +138,9 @@ namespace Aquarium
                         }
 
                     }
+
+                    */
+
                     if (i == aq.FishList.Count - 1)
                     {
                         //doAsShort = false;

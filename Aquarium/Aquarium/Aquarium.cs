@@ -54,7 +54,7 @@ namespace Aquarium
             {
                 for (int i = 0; i < selection.Look.Length; i++)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green; 
+                    Console.ForegroundColor = ConsoleColor.Green;
                     AquariumBehaelter[(int)(selection.XPosition) + i, (int)selection.YPosition] = selection.Look[i].ToString();
                 }
             }
@@ -118,6 +118,23 @@ namespace Aquarium
             foreach (Fish myFish in FishList)
             {
 
+                if (random.Next(0, 2) == 0)
+                {
+                    myFish.Look = myFish.BasicLook;
+                    myFish.XPosition -= myFish.Speed;
+                    myFish.SwimDirection = true;
+
+                }
+
+                else
+                {
+                    myFish.Look = myFish.InvertedLook;
+                    myFish.XPosition += myFish.Speed;
+                    myFish.SwimDirection = false;
+                }
+
+
+
                 if (myFish.XPosition >= 2 && myFish.SwimDirection == false)
                 {
                     myFish.Look = myFish.BasicLook;
@@ -154,7 +171,22 @@ namespace Aquarium
                 if (random.Next(0, 100) <= myFish.MoveSpeedUpAndDown)
                 {
 
-                    if (myFish.YPosition >= 1 && myFish.SwimDepth == false)
+                    //random up or down swimming for each fish
+                    if (random.Next(0, 2) == 0)
+                    {
+                        myFish.SwimDepth = true;
+                        // myFish.YPosition += 1;
+
+                    }
+                    else
+                    {
+                        myFish.SwimDepth = false;
+                        // myFish.YPosition -= 1;
+
+                    }
+
+                    //checking the aquarium boundaries up and down and changing direction if close to top or bottom
+                    if (myFish.YPosition >= 2 && myFish.SwimDepth == false)
                     {
 
                         myFish.YPosition -= 1;
@@ -172,7 +204,6 @@ namespace Aquarium
                         myFish.YPosition += 1;
 
                     }
-
 
 
                 }
