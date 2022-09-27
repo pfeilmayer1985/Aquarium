@@ -118,19 +118,19 @@ namespace Aquarium
             foreach (Fish myFish in FishList)
             {
 
-                if (random.Next(0, 2) == 0)
+                if (random.Next(0, 20) == 10)
                 {
                     myFish.Look = myFish.BasicLook;
-                    myFish.XPosition -= myFish.Speed;
-                    myFish.SwimDirection = true;
+                    myFish.SwimDirection = !myFish.SwimDirection;
+                    if (myFish.SwimDirection)
+                    {
+                        myFish.Look = myFish.BasicLook;
+                    }
+                    else
+                    {
+                        myFish.Look = myFish.InvertedLook;
+                    }
 
-                }
-
-                else
-                {
-                    myFish.Look = myFish.InvertedLook;
-                    myFish.XPosition += myFish.Speed;
-                    myFish.SwimDirection = false;
                 }
 
 
