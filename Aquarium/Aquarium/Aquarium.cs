@@ -54,7 +54,7 @@ namespace Aquarium
             {
                 for (int i = 0; i < selection.Look.Length; i++)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     AquariumBehaelter[(int)(selection.XPosition) + i, (int)selection.YPosition] = selection.Look[i].ToString();
                 }
             }

@@ -23,7 +23,7 @@ namespace Aquarium
             //        Console.WriteLine($"I:{i}  \t j: {j}");
             //    }
             //}
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
             double x = Convert.ToDouble(Console.ReadLine());
             Console.Write("Your Aquarium Height (y) (min 15, max 30): ");
@@ -52,7 +52,7 @@ namespace Aquarium
             aq.AddSwordfish((int)posXSw, (int)posYSw);
 
             bool doAsLong = true;
-            bool doAsShort = true;
+            // bool doAsShort = true;
 
             //aici se verifica pestele actual in comparatie cu pozitia pestelui anterior si urmator.
 
@@ -61,6 +61,12 @@ namespace Aquarium
 
                 for (int j = i; j < aq.FishList.Count; j++)
                 {
+
+                    //if the fish i is the same as fish j, continue
+                    if (aq.FishList[i] == aq.FishList[j])
+                    {
+                        continue;
+                    }
 
                     if (aq.FishList[i].YPosition - 2 <= aq.FishList[j].YPosition && aq.FishList[j].YPosition <= aq.FishList[i].YPosition + 2)
                     {
@@ -79,8 +85,8 @@ namespace Aquarium
             }
 
 
-
-            while (true)
+            int numberOfRefreshes = 0;
+            while (doAsLong)
             {
                 aq.AquariumLeer(x, y);
                 aq.MoveXAxis();
@@ -93,7 +99,7 @@ namespace Aquarium
                     for (int j = i; j < aq.FishList.Count; j++)
                     {
 
-                        //if the fish i is the same as fish j, continue ???
+                        //if the fish i is the same as fish j, continue
                         if (aq.FishList[i] == aq.FishList[j])
                         {
                             continue;
@@ -108,8 +114,8 @@ namespace Aquarium
 
                             //Make a new integer based list and add the second fish's look length(range - from starting x point to look lenght as endpoint) to the fish/list
                             List<int> secondFishRange = Enumerable.Range((int)aq.FishList[j].XPosition, aq.FishList[j].Look.Length).ToList();
-                            
-                            //Check if the range/length of the first list has any overlapping with the second list and save the value to a boolean - either false or true
+
+                            //Check if the range of the first list has any overlapping with the second list and save the value to a boolean - either false or true
                             bool intersection = firstFishRange.Any(a => secondFishRange.Any(b => a == b));
 
                             //if the boolean previously saved is true and any element from the first list/fish overlapps with any elements from the second list/fish
@@ -120,7 +126,7 @@ namespace Aquarium
                                 {
                                     //the first fish, being bigger, eats the second, smaller fish
                                     aq.RemoveAFish(aq.FishList[j]);
-                                    
+
                                     //resetting the list, starting both list checking from 0 instead of continuing from the last point
                                     i = 0;
                                     j = 0;
@@ -129,7 +135,7 @@ namespace Aquarium
                                 {
                                     //the second fish, being bigger, eats the first, smaller fish
                                     aq.RemoveAFish(aq.FishList[i]);
-                                    
+
                                     //resetting the list, starting both list checking from 0 instead of continuing from the last point
                                     i = 0;
                                     j = 0;
@@ -178,6 +184,20 @@ namespace Aquarium
                 */
 
                 Thread.Sleep(1);
+
+                if (aq.FishList.Count == 1)
+                {
+                    foreach (var fish in aq.FishList)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"The only survivor is the {fish.TypeF}, also known as {fish.BasicLook}." +
+                            $"\nThe 'Game' was refreshed {numberOfRefreshes} times until we had a winner." +
+                            $"\nThanks for playing!" );
+                    }
+                    doAsLong = false;
+                }
+                numberOfRefreshes++;
             }
 
             Console.ReadLine();
