@@ -120,7 +120,7 @@ namespace Aquarium
 
                 if (random.Next(0, 20) == 10)
                 {
-                    myFish.Look = myFish.BasicLook;
+                    
                     myFish.SwimDirection = !myFish.SwimDirection;
                     if (myFish.SwimDirection)
                     {
