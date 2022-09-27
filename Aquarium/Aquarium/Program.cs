@@ -16,7 +16,15 @@ namespace Aquarium
         static void Main(string[] args)
         {
 
-            Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    for (int j = i; j < 10; j++)
+            //    {
+            //        Console.WriteLine($"I:{i}  \t j: {j}");
+            //    }
+            //}
+
+             Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
             double x = Convert.ToDouble(Console.ReadLine());
             Console.Write("Your Aquarium Height (y) (min 15, max 30): ");
             double y = Convert.ToDouble(Console.ReadLine());
@@ -80,28 +88,35 @@ namespace Aquarium
                 aq.MoveYAxis();
 
 
-                //while (doAsShort)
-                //{
-                for (int i = 1; i < aq.FishList.Count; i++)
+
+                for (int i = 0; i < aq.FishList.Count; i++)
                 {
-
-                    List<int> firstFishRange = Enumerable.Range((int)aq.FishList[i - 1].XPosition, aq.FishList[i - 1].Size).ToList();
-                    List<int> secondFishRange = Enumerable.Range((int)aq.FishList[i].XPosition, aq.FishList[i].Size).ToList();
-
-                    bool intersection = firstFishRange.Any(a => secondFishRange.Any(b => a == b));
-
-                    if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) && intersection)
+                    for (int j = i; j < aq.FishList.Count; j++)
                     {
-                        if (aq.FishList[i - 1].Size > aq.FishList[i].Size)
+                        if (aq.FishList[i] == aq.FishList[j])
                         {
-                            aq.RemoveAFish(aq.FishList[i]);
+                            continue;
                         }
-                        else
+                        if (aq.FishList[j].YPosition == aq.FishList[j].YPosition)
                         {
-                            aq.RemoveAFish(aq.FishList[i - 1]);
+                            List<int> firstFishRange = Enumerable.Range((int)aq.FishList[i].XPosition, aq.FishList[i].Look.Length).ToList();
+                            List<int> secondFishRange = Enumerable.Range((int)aq.FishList[j].XPosition, aq.FishList[j].Look.Length).ToList();
+                            bool intersection = firstFishRange.Any(a => secondFishRange.Any(b => a == b));
+
+                            if (intersection)
+                            {
+                                if (aq.FishList[i].Look.Length >= aq.FishList[j].Look.Length)
+                                {
+                                    aq.RemoveAFish(aq.FishList[j]);
+                                }
+                                else
+                                {
+                                    aq.RemoveAFish(aq.FishList[i]);
+                                }
+                            }
                         }
                     }
-
+                }
                     /*
                     //Checking if Y(A) is the same with Y(B) - both fishes are on the same line/heighth
                     if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) &&
@@ -140,13 +155,6 @@ namespace Aquarium
                     }
 
                     */
-
-                    if (i == aq.FishList.Count - 1)
-                    {
-                        //doAsShort = false;
-                    }
-                    //}
-                }
 
                 Thread.Sleep(300);
             }
