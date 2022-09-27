@@ -24,7 +24,7 @@ namespace Aquarium
             //    }
             //}
 
-             Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
+            Console.Write("Your Aquarium Length (x) (min 40, max 120): ");
             double x = Convert.ToDouble(Console.ReadLine());
             Console.Write("Your Aquarium Height (y) (min 15, max 30): ");
             double y = Convert.ToDouble(Console.ReadLine());
@@ -54,31 +54,30 @@ namespace Aquarium
             bool doAsLong = true;
             bool doAsShort = true;
 
-            while (doAsLong)
+            //aici se verifica pestele actual in comparatie cu pozitia pestelui anterior si urmator.
+
+            for (int i = 0; i < aq.FishList.Count; i++)
             {
-                for (int i = 1; i < aq.FishList.Count; i++)
+
+                for (int j = i; j < aq.FishList.Count; j++)
                 {
 
-                    //aici se verifica pestele actual in comparatie cu pozitia pestelui anterior. dar al ultimului cu primul nu sau al doilea
-
-                    if (aq.FishList[i - 1].YPosition - 1 <= aq.FishList[i].YPosition && aq.FishList[i].YPosition <= aq.FishList[i - 1].YPosition + 1)
+                    if (aq.FishList[i].YPosition - 2 <= aq.FishList[j].YPosition && aq.FishList[j].YPosition <= aq.FishList[i].YPosition + 2)
                     {
-                        aq.FishList[i].YPosition = randomGenerator.Next(1, (int)y - 1);
+                        aq.FishList[j].YPosition = randomGenerator.Next(1, (int)y - 1);
                     }
-                    else if (aq.FishList[i - 1].XPosition - 11 <= aq.FishList[i].XPosition && aq.FishList[i].XPosition <= aq.FishList[i - 1].XPosition + 11)
+                    else if (aq.FishList[i].XPosition - aq.FishList[j].Look.Length <= aq.FishList[j].XPosition && aq.FishList[j].XPosition <= aq.FishList[i].XPosition + aq.FishList[j].Look.Length)
                     {
-                        aq.FishList[i].XPosition = randomGenerator.Next(1, (int)x - 11);
+                        aq.FishList[j].XPosition = randomGenerator.Next(1, (int)x - (aq.FishList[j].Look.Length + 1));
                     }
                     else
                     {
-                        if (i == aq.FishList.Count - 1)
-                        {
-                            doAsLong = false;
-                        }
+                        continue;
                     }
 
                 }
             }
+
 
 
             while (true)
@@ -97,7 +96,7 @@ namespace Aquarium
                         {
                             continue;
                         }
-                        if (aq.FishList[j].YPosition == aq.FishList[j].YPosition)
+                        if (aq.FishList[i].YPosition == aq.FishList[j].YPosition)
                         {
                             List<int> firstFishRange = Enumerable.Range((int)aq.FishList[i].XPosition, aq.FishList[i].Look.Length).ToList();
                             List<int> secondFishRange = Enumerable.Range((int)aq.FishList[j].XPosition, aq.FishList[j].Look.Length).ToList();
@@ -105,56 +104,60 @@ namespace Aquarium
 
                             if (intersection)
                             {
-                                if (aq.FishList[i].Look.Length >= aq.FishList[j].Look.Length)
+                                if (aq.FishList[i].Look.Length > aq.FishList[j].Look.Length)
                                 {
                                     aq.RemoveAFish(aq.FishList[j]);
+                                    i = 0;
+                                    j = 0;
                                 }
                                 else
                                 {
                                     aq.RemoveAFish(aq.FishList[i]);
+                                    i = 0;
+                                    j = 0;
                                 }
                             }
                         }
                     }
                 }
-                    /*
-                    //Checking if Y(A) is the same with Y(B) - both fishes are on the same line/heighth
-                    if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) &&
-                        //Checking if X(A) is in the same pos with X(B)+FishLength
-                        (aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition + aq.FishList[i].Size ||
-                        //Checking if X(A)+FishLength is in the same pos with X(B)
-                        aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size == aq.FishList[i].XPosition ||
-                        //Checking if X(A) is in the same pos with X(B)
-                        aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition ||
-                        //Checking if X(A)+FishLength is in the same pos with X(B)+FishLength
-                        aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size == aq.FishList[i].XPosition + aq.FishList[i].Size ||
-                        //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)
-                        aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition ||
-                        //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)+FishLength
-                        aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition + aq.FishList[i].Size ||
-                        //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)+HalfOfFishLength
-                        aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) ||
-                        //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)
-                        aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition ||
-                        //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)+FishLength
-                        aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size ||
-                        //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)+HalfOfFishLength
-                        aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2)
+                /*
+                //Checking if Y(A) is the same with Y(B) - both fishes are on the same line/heighth
+                if ((aq.FishList[i - 1].YPosition == aq.FishList[i].YPosition) &&
+                    //Checking if X(A) is in the same pos with X(B)+FishLength
+                    (aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition + aq.FishList[i].Size ||
+                    //Checking if X(A)+FishLength is in the same pos with X(B)
+                    aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size == aq.FishList[i].XPosition ||
+                    //Checking if X(A) is in the same pos with X(B)
+                    aq.FishList[i - 1].XPosition == aq.FishList[i].XPosition ||
+                    //Checking if X(A)+FishLength is in the same pos with X(B)+FishLength
+                    aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size == aq.FishList[i].XPosition + aq.FishList[i].Size ||
+                    //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)
+                    aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition ||
+                    //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)+FishLength
+                    aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition + aq.FishList[i].Size ||
+                    //Checking if X(A)+HalfOfFishLength is in the same pos with X(B)+HalfOfFishLength
+                    aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2) == aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) ||
+                    //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)
+                    aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition ||
+                    //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)+FishLength
+                    aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition + aq.FishList[i - 1].Size ||
+                    //Checking if X(B)+HalfOfFishLength is in the same pos with X(A)+HalfOfFishLength
+                    aq.FishList[i].XPosition + (aq.FishList[i].Size / 2) == aq.FishList[i - 1].XPosition + (aq.FishList[i - 1].Size / 2)
 
-                        ))
+                    ))
+                {
+                    if (aq.FishList[i - 1].Size > aq.FishList[i].Size)
                     {
-                        if (aq.FishList[i - 1].Size > aq.FishList[i].Size)
-                        {
-                            aq.RemoveAFish(aq.FishList[i]);
-                        }
-                        else
-                        {
-                            aq.RemoveAFish(aq.FishList[i - 1]);
-                        }
-
+                        aq.RemoveAFish(aq.FishList[i]);
+                    }
+                    else
+                    {
+                        aq.RemoveAFish(aq.FishList[i - 1]);
                     }
 
-                    */
+                }
+
+                */
 
                 Thread.Sleep(300);
             }
