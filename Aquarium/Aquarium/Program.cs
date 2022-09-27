@@ -16,14 +16,6 @@ namespace Aquarium
         static void Main(string[] args)
         {
 
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    for (int j = i; j < 10; j++)
-            //    {
-            //        Console.WriteLine($"I:{i}  \t j: {j}");
-            //    }
-            //}
-
             bool continueGame = false;
 
             do
@@ -75,7 +67,6 @@ namespace Aquarium
                 }
 
 
-
                 bool doAsLong = true;
 
                 //aici se verifica pestele actual in comparatie cu pozitia pestelui anterior si urmator.
@@ -112,13 +103,9 @@ namespace Aquarium
                 int numberOfRefreshes = 0;
                 while (doAsLong)
                 {
-
-
                     aq.AquariumLeer(x, y);
                     aq.MoveXAxis();
                     aq.MoveYAxis();
-
-
 
                     for (int i = 0; i < aq.FishList.Count; i++)
                     {
@@ -163,10 +150,6 @@ namespace Aquarium
                                         i = Math.Max(0, i);
                                         j = Math.Max(0, j);
 
-
-                                        //resetting the list, starting both list checking from 0 instead of continuing from the last point
-                                        //i = 0;
-                                        //j = 0;
                                     }
                                     else
                                     {
@@ -178,10 +161,6 @@ namespace Aquarium
                                         i = Math.Max(0, i);
                                         j = Math.Max(0, j);
 
-
-                                        //resetting the list, starting both list checking from 0 instead of continuing from the last point
-                                        //i = 0;
-                                        //j = 0;
                                     }
                                 }
                             }
@@ -241,44 +220,7 @@ namespace Aquarium
                 }
             } while (continueGame);
 
-            //Console.ReadLine();
 
-
-
-
-
-
-
-
-            //List<CarUebung> listOfCars = new List<CarUebung>();
-            //listOfCars.Add(CarUebung.AskForCar());
-
-            //foreach (CarUebung car in listOfCars)
-            //{
-            //    car.ShowMyCar();
-            //}
-            //listOfCars[0].EngineOn();
-            //listOfCars[0].Accelerate();
-
-            //listOfCars[0].AccelerateCustom();
-            //if (listOfCars[0].Speed >= listOfCars[0].MaxSpeed)
-            //{
-            //    Console.WriteLine("You are over the Maximum Vehicle Speed!");
-            //    listOfCars[0].Speed = listOfCars[0].MaxSpeed - (listOfCars[0].MaxSpeed / 2);
-            //    Console.WriteLine($"For safety reasons I will accelerate to half from the Max Speed : {listOfCars[0].MaxSpeed - (listOfCars[0].MaxSpeed / 2)} KmH!");
-            //}
-
-            //listOfCars[0].ChangeColor();
-            //listOfCars[0].EngineOn();
-            //listOfCars[0].Accelerate();
-            //listOfCars[0].Brake();
-
-            //listOfCars[0].EngineOff();
-            //listOfCars[0].EngineOff();
-
-            //int zahl = 5;
-            //zahl.ToString();
-            //Console.WriteLine(zahl);
 
         }
 
