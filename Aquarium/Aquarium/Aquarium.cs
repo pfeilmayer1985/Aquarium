@@ -24,15 +24,12 @@ namespace Aquarium
 
             AquariumBehaelter = new string[x, y];
 
-            for (int j = 0; j < y; j++)
+            for (int i = 0; i < x; i++)
             {
-
-                for (int i = 0; i < x; i++)
+                for (int j = 0; j < y; j++)
                 {
-
                     if (i == 0 || i == x - 1)
                     {
-
                         AquariumBehaelter[i, j] = "|";
                     }
                     else
@@ -55,7 +52,7 @@ namespace Aquarium
                 for (int i = 0; i < selection.Look.Length; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    AquariumBehaelter[(int)(selection.XPosition) + i, (int)selection.YPosition] = selection.Look[i].ToString();
+                    AquariumBehaelter[(selection.XPosition) + i, selection.YPosition] = selection.Look[i].ToString();
                 }
             }
             Console.Clear();
@@ -72,44 +69,54 @@ namespace Aquarium
 
         }
 
+
+
         public void AddCarp(int x, int y)
         {
-
             FCarp myCarp = new FCarp(x, y);
             FishList.Add(myCarp);
-
         }
+
+
 
         public void AddShark(int x, int y)
         {
-
             FShark myShark = new FShark(x, y);
             FishList.Add(myShark);
-
         }
+
+
 
         public void AddBlowfish(int x, int y)
         {
-
             FBlowfish myBlowfish = new FBlowfish(x, y);
             FishList.Add(myBlowfish);
-
         }
 
-        public void RemoveAFish(Fish fishToBeRemoved)
-        {
 
-            FishList.Remove(fishToBeRemoved);
-
-        }
 
         public void AddSwordfish(int x, int y)
         {
-
             FSwordfish mySwordfish = new FSwordfish(x, y);
             FishList.Add(mySwordfish);
-
         }
+
+
+
+        public void AddFood(int x, int y)
+        {
+            FFood myFood = new FFood(x, y);
+            FishList.Add(myFood);
+        }
+
+
+
+        public void RemoveAFish(Fish fishToBeRemoved)
+        {
+            FishList.Remove(fishToBeRemoved);
+        }
+
+
 
         public void MoveXAxis()
         {
@@ -118,7 +125,7 @@ namespace Aquarium
             foreach (Fish myFish in FishList)
             {
 
-                if (random.Next(0, 20) == 10)
+                if (random.Next(0, 25) == 10)
                 {
 
                     myFish.SwimDirection = !myFish.SwimDirection;
@@ -140,7 +147,7 @@ namespace Aquarium
                     myFish.Look = myFish.BasicLook;
                     myFish.XPosition -= myFish.Speed;
                 }
-                else if (myFish.XPosition + myFish.Size >= AquariumBehaelter.GetLength(0) - 2)
+                else if (myFish.XPosition + myFish.Look.Length >= AquariumBehaelter.GetLength(0) - 2)
                 {
                     myFish.Look = myFish.BasicLook;
                     myFish.XPosition -= myFish.Speed;

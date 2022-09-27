@@ -15,7 +15,7 @@ namespace Aquarium
             InvertedLook = "><====///>";
             TypeF = "Shark";
             Speed = 1;
-            Size = 10;
+            Size = 6;
             MoveSpeedUpAndDown = 25;
             XPosition = xPos;
             YPosition = yPos;
