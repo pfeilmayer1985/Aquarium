@@ -95,7 +95,6 @@ namespace Aquarium
                         {
                             continue;
                         }
-
                     }
                 }
 
@@ -219,10 +218,6 @@ namespace Aquarium
                     numberOfRefreshes++;
                 }
             } while (continueGame);
-
-
-
         }
-
     }
 }

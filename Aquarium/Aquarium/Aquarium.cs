@@ -38,12 +38,9 @@ namespace Aquarium
                     }
                     if (j == y - 1)
                     {
-
                         AquariumBehaelter[i, j] = "-";
                     }
-
                 }
-
             }
 
 
@@ -65,8 +62,6 @@ namespace Aquarium
                 }
                 Console.Write("\n");
             }
-
-
         }
 
 
@@ -121,13 +116,10 @@ namespace Aquarium
         public void MoveXAxis()
         {
 
-
             foreach (Fish myFish in FishList)
             {
-
                 if (random.Next(0, 25) == 10)
                 {
-
                     myFish.SwimDirection = !myFish.SwimDirection;
                     if (myFish.SwimDirection)
                     {
@@ -137,9 +129,7 @@ namespace Aquarium
                     {
                         myFish.Look = myFish.InvertedLook;
                     }
-
                 }
-
 
 
                 if (myFish.XPosition >= 2 && myFish.SwimDirection == false)
@@ -158,46 +148,33 @@ namespace Aquarium
                     myFish.XPosition += myFish.Speed;
                     myFish.Look = myFish.InvertedLook;
                     myFish.SwimDirection = true;
-
                 }
             }
-
-
         }
 
         public void MoveYAxis()
         {
 
-
-
             foreach (Fish myFish in FishList)
             {
-
-
-
                 if (random.Next(0, 1000) <= myFish.MoveSpeedUpAndDown)
                 {
-
                     //random up or down swimming for each fish
                     if (random.Next(0, 2) == 0)
                     {
                         myFish.SwimDepth = true;
                         // myFish.YPosition += 1;
-
                     }
                     else
                     {
                         myFish.SwimDepth = false;
                         // myFish.YPosition -= 1;
-
                     }
 
                     //checking the aquarium boundaries up and down and changing direction if close to top or bottom
                     if (myFish.YPosition >= 2 && myFish.SwimDepth == false)
                     {
-
                         myFish.YPosition -= 1;
-
                     }
                     else if (myFish.YPosition >= AquariumBehaelter.GetLength(1) - 2)
                     {
@@ -209,10 +186,7 @@ namespace Aquarium
                     {
                         myFish.SwimDepth = true;
                         myFish.YPosition += 1;
-
                     }
-
-
                 }
             }
         }
