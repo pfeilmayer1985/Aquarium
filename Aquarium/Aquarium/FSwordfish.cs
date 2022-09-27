@@ -16,7 +16,7 @@ namespace Aquarium
             TypeF = "Swordfish";
             Speed = 1;
             Size = 4;
-            MoveSpeedUpAndDown = 20;
+            MoveSpeedUpAndDown = 200;
             XPosition = xPos;
             YPosition = yPos;
         }

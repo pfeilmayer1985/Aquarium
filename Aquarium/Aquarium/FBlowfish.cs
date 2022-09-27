@@ -17,7 +17,7 @@ namespace Aquarium
             TypeF = "Blowfish";
             Speed = 1;
             Size = 5;
-            MoveSpeedUpAndDown = 10;
+            MoveSpeedUpAndDown = 100;
             XPosition = xPos;
             YPosition = yPos;
         }

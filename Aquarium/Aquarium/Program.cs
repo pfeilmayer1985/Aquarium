@@ -23,6 +23,7 @@ namespace Aquarium
             //        Console.WriteLine($"I:{i}  \t j: {j}");
             //    }
             //}
+
             bool continueGame = false;
 
             do
@@ -50,7 +51,7 @@ namespace Aquarium
 
 
                 Random randomGenerator = new Random();
-               
+
 
                 for (int i = 0; i < carpZahl; i++)
                 {
@@ -111,6 +112,8 @@ namespace Aquarium
                 int numberOfRefreshes = 0;
                 while (doAsLong)
                 {
+
+
                     aq.AquariumLeer(x, y);
                     aq.MoveXAxis();
                     aq.MoveYAxis();
@@ -153,13 +156,13 @@ namespace Aquarium
                                     else if (aq.FishList[i].Size > aq.FishList[j].Size)
                                     {
                                         //the first fish, being bigger, eats the second, smaller fish
-                                        aq.FishList[i].Size += (aq.FishList[j].Size - 2);
+                                        aq.FishList[i].Size += aq.FishList[j].Size;
                                         aq.RemoveAFish(aq.FishList[j]);
                                         i--;
                                         j--;
                                         i = Math.Max(0, i);
                                         j = Math.Max(0, j);
-                                       
+
 
                                         //resetting the list, starting both list checking from 0 instead of continuing from the last point
                                         //i = 0;
@@ -168,13 +171,13 @@ namespace Aquarium
                                     else
                                     {
                                         //the second fish, being bigger, eats the first, smaller fish
-                                        aq.FishList[j].Size += (aq.FishList[i].Size - 2);
+                                        aq.FishList[j].Size += aq.FishList[i].Size;
                                         aq.RemoveAFish(aq.FishList[i]);
                                         i--;
                                         j--;
                                         i = Math.Max(0, i);
                                         j = Math.Max(0, j);
-                                        
+
 
                                         //resetting the list, starting both list checking from 0 instead of continuing from the last point
                                         //i = 0;
@@ -186,46 +189,50 @@ namespace Aquarium
                     }
 
 
-                    Thread.Sleep(300);
+                    Thread.Sleep(50);
 
 
-                    if (aq.FishList.Count == 1)
+                    if (aq.FishList.Where(w => w.Size > 1).ToList().Count == 1)
+                    //if (aq.FishList.Count == 1)
                     {
                         foreach (var fish in aq.FishList)
                         {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine($"The only survivor is the {fish.TypeF}, also known as '{fish.BasicLook}' or '{fish.InvertedLook}'." +
-                                $"\nOur winner was an overweight {fish.TypeF} size {fish.Size}." +
-                                $"\nThe 'Game' was refreshed {numberOfRefreshes} times until our {fish.TypeF} ate it's way to victory." +
-                                $"\nThanks for playing!\n");
-
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("Do you want to play again (y/n)?");
-                            string replayGame = Console.ReadLine();
-
-                            while (replayGame != "y" && replayGame != "n")
+                            if (fish.Size > 1)
                             {
                                 Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Let's try again. This time try to pay attention!");
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.WriteLine($"The only survivor is a {fish.TypeF}, also known as '{fish.BasicLook}' or '{fish.InvertedLook}'." +
+                                    $"\nOur winner was an overweight {fish.TypeF} size {fish.Size}." +
+                                    $"\nThe 'Game' was refreshed {numberOfRefreshes} times until our {fish.TypeF} ate it's way to victory." +
+                                    $"\nThanks for playing!\n");
+
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine("Do you want to play again (y/n)?");
-                                replayGame = Console.ReadLine();
-                            }
+                                string replayGame = Console.ReadLine();
 
-                            switch (replayGame)
-                            {
-                                case "y":
-                                    continueGame = true;
+                                while (replayGame != "y" && replayGame != "n")
+                                {
                                     Console.Clear();
-                                    break;
-                                case "n":
-                                    continueGame = false;
-                                    break;
-                                default:
-                                    Console.WriteLine("Something weird happen!");
-                                    break;
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Let's try again. This time try to pay attention!");
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Do you want to play again (y/n)?");
+                                    replayGame = Console.ReadLine();
+                                }
+
+                                switch (replayGame)
+                                {
+                                    case "y":
+                                        continueGame = true;
+                                        Console.Clear();
+                                        break;
+                                    case "n":
+                                        continueGame = false;
+                                        break;
+                                    default:
+                                        Console.WriteLine("Something weird happen!");
+                                        break;
+                                }
                             }
                         }
                         doAsLong = false;

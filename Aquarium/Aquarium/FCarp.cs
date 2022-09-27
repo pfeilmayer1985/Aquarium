@@ -17,7 +17,7 @@ namespace Aquarium
             TypeF = "Carp";
             Speed = 1;
             Size = 3;
-            MoveSpeedUpAndDown = 50;
+            MoveSpeedUpAndDown = 500;
             XPosition = xPos;
             YPosition = yPos;
         }

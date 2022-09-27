@@ -16,7 +16,7 @@ namespace Aquarium
             TypeF = "Shark";
             Speed = 1;
             Size = 6;
-            MoveSpeedUpAndDown = 25;
+            MoveSpeedUpAndDown = 250;
             XPosition = xPos;
             YPosition = yPos;
         }

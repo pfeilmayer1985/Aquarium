@@ -10,13 +10,13 @@ namespace Aquarium
     {
         public FFood(int xPos, int yPos)
         {
-            Look = "*";
-            BasicLook = "*";
+            Look = ".";
+            BasicLook = ".";
             InvertedLook = "*";
             TypeF = "Food";
             Speed = 0;
             Size = 1;
-            MoveSpeedUpAndDown = 0;
+            MoveSpeedUpAndDown = 1;
             XPosition = xPos;
             YPosition = yPos;
         }

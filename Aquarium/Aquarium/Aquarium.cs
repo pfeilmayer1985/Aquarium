@@ -175,7 +175,7 @@ namespace Aquarium
 
 
 
-                if (random.Next(0, 100) <= myFish.MoveSpeedUpAndDown)
+                if (random.Next(0, 1000) <= myFish.MoveSpeedUpAndDown)
                 {
 
                     //random up or down swimming for each fish
